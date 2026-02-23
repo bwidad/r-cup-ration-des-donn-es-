@@ -3,36 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Application Vitrine - Profil Personne</title>
+<title>Vitrine - Gestion des Profils</title>
 
 <style>
 :root{
-    --primary:#2563eb;
+    --primary:#4f46e5;
     --secondary:#f3f4f6;
-    --danger:#dc2626;
     --success:#16a34a;
+    --danger:#dc2626;
 }
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#3b82f6,#06b6d4);
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background: linear-gradient(135deg,#6366f1,#06b6d4);
     min-height:100vh;
     padding:20px;
 }
 
 .container{
+    max-width:1000px;
+    margin:auto;
     background:white;
-    width:100%;
-    max-width:750px;
     padding:30px;
     border-radius:12px;
     box-shadow:0 15px 40px rgba(0,0,0,0.2);
@@ -41,41 +38,33 @@ body{
 h1{
     text-align:center;
     margin-bottom:25px;
-    color:#111827;
 }
 
-.form-group{
-    margin-bottom:15px;
+.form-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
 }
 
 label{
+    font-weight:600;
     display:block;
     margin-bottom:5px;
-    font-weight:600;
 }
 
 input, select, textarea{
     width:100%;
     padding:10px;
-    border:1px solid #d1d5db;
     border-radius:8px;
-    font-size:14px;
-    transition:0.3s;
+    border:1px solid #ccc;
 }
 
-input:focus, select:focus, textarea:focus{
-    border-color:var(--primary);
-    outline:none;
-}
-
-.buttons{
-    display:flex;
-    gap:10px;
-    margin-top:15px;
+textarea{
+    resize:none;
 }
 
 button{
-    flex:1;
+    margin-top:15px;
     padding:12px;
     border:none;
     border-radius:8px;
@@ -84,38 +73,41 @@ button{
     transition:0.3s;
 }
 
-.btn-submit{
+.btn-primary{
     background:var(--primary);
     color:white;
 }
 
-.btn-submit:hover{
-    background:#1d4ed8;
+.btn-primary:hover{
+    background:#3730a3;
 }
 
-.btn-reset{
+.btn-danger{
     background:var(--danger);
     color:white;
 }
 
-.btn-reset:hover{
+.btn-danger:hover{
     background:#b91c1c;
 }
 
 .result{
-    margin-top:25px;
+    margin-top:30px;
     padding:20px;
     background:var(--secondary);
     border-radius:10px;
     display:none;
 }
 
-.result h2{
-    margin-bottom:15px;
-    color:#111827;
+.summary-card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom:20px;
 }
 
-.summary p{
+.summary-card p{
     margin-bottom:8px;
 }
 
@@ -124,9 +116,26 @@ button{
     color:var(--primary);
 }
 
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th, td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+th{
+    background:var(--primary);
+    color:white;
+}
+
 @media(max-width:600px){
-    .buttons{
-        flex-direction:column;
+    table{
+        font-size:12px;
     }
 }
 </style>
@@ -135,91 +144,94 @@ button{
 <body>
 
 <div class="container">
-    <h1>Formulaire Profil Personne</h1>
+    <h1>Gestion des Profils Personnes</h1>
 
     <form id="personForm">
-
-        <div class="form-group">
-            <label>Nom *</label>
-            <input type="text" id="nom" required>
+        <div class="form-grid">
+            <div>
+                <label>Nom *</label>
+                <input type="text" id="nom" required>
+            </div>
+            <div>
+                <label>Prénom *</label>
+                <input type="text" id="prenom" required>
+            </div>
+            <div>
+                <label>Âge *</label>
+                <input type="number" id="age" required>
+            </div>
+            <div>
+                <label>Email *</label>
+                <input type="email" id="email" required>
+            </div>
+            <div>
+                <label>Ville *</label>
+                <input type="text" id="ville" required>
+            </div>
+            <div>
+                <label>Profession</label>
+                <input type="text" id="profession">
+            </div>
+            <div>
+                <label>Genre</label>
+                <select id="genre">
+                    <option value="">Sélectionner</option>
+                    <option>Homme</option>
+                    <option>Femme</option>
+                    <option>Autre</option>
+                </select>
+            </div>
+            <div style="grid-column:1/-1;">
+                <label>Description</label>
+                <textarea id="description" rows="3"></textarea>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Prénom *</label>
-            <input type="text" id="prenom" required>
-        </div>
-
-        <div class="form-group">
-            <label>Âge *</label>
-            <input type="number" id="age" min="1" max="120" required>
-        </div>
-
-        <div class="form-group">
-            <label>Email *</label>
-            <input type="email" id="email" required>
-        </div>
-
-        <div class="form-group">
-            <label>Téléphone</label>
-            <input type="tel" id="telephone">
-        </div>
-
-        <div class="form-group">
-            <label>Ville *</label>
-            <input type="text" id="ville" required>
-        </div>
-
-        <div class="form-group">
-            <label>Profession</label>
-            <input type="text" id="profession">
-        </div>
-
-        <div class="form-group">
-            <label>Genre</label>
-            <select id="genre">
-                <option value="">Sélectionner</option>
-                <option>Homme</option>
-                <option>Femme</option>
-                <option>Autre</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Description</label>
-            <textarea id="description" rows="3"></textarea>
-        </div>
-
-        <div class="buttons">
-            <button type="submit" class="btn-submit">Générer Résumé</button>
-            <button type="button" class="btn-reset" onclick="resetForm()">Réinitialiser</button>
-        </div>
-
+        <button type="submit" class="btn-primary">Ajouter Profil</button>
+        <button type="button" class="btn-danger" onclick="resetForm()">Réinitialiser</button>
     </form>
 
-    <div class="result" id="resultBox">
-        <h2>Résumé des Informations</h2>
-        <div class="summary" id="summaryContent"></div>
+    <div class="result" id="resultSection">
+        <h2>Résumé du Profil Ajouté</h2>
+        <div class="summary-card" id="summaryCard"></div>
+
+        <h2>Liste des Profils</h2>
+        <table id="profilesTable">
+            <thead>
+                <tr>
+                    <th>Nom Complet</th>
+                    <th>Âge</th>
+                    <th>Email</th>
+                    <th>Ville</th>
+                    <th>Profession</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
+
 </div>
 
 <script>
 const form = document.getElementById("personForm");
-const resultBox = document.getElementById("resultBox");
-const summaryContent = document.getElementById("summaryContent");
+const resultSection = document.getElementById("resultSection");
+const summaryCard = document.getElementById("summaryCard");
+const tableBody = document.querySelector("#profilesTable tbody");
+
+let profiles = [];
 
 form.addEventListener("submit", function(e){
     e.preventDefault();
 
-    const data = {
-        nom: document.getElementById("nom").value.trim(),
-        prenom: document.getElementById("prenom").value.trim(),
-        age: document.getElementById("age").value,
-        email: document.getElementById("email").value.trim(),
-        telephone: document.getElementById("telephone").value.trim(),
-        ville: document.getElementById("ville").value.trim(),
-        profession: document.getElementById("profession").value.trim(),
-        genre: document.getElementById("genre").value,
-        description: document.getElementById("description").value.trim()
+    const profile = {
+        nom: nom.value.trim(),
+        prenom: prenom.value.trim(),
+        age: age.value,
+        email: email.value.trim(),
+        ville: ville.value.trim(),
+        profession: profession.value.trim(),
+        genre: genre.value,
+        description: description.value.trim()
     };
 
     if(!form.checkValidity()){
@@ -227,28 +239,43 @@ form.addEventListener("submit", function(e){
         return;
     }
 
-    generateSummary(data);
+    profiles.push(profile);
+
+    displaySummary(profile);
+    updateTable();
+    resultSection.style.display="block";
+    form.reset();
 });
 
-function generateSummary(data){
-    summaryContent.innerHTML = `
-        <p><span class="highlight">Nom complet :</span> ${data.prenom} ${data.nom}</p>
-        <p><span class="highlight">Âge :</span> ${data.age} ans</p>
-        <p><span class="highlight">Email :</span> ${data.email}</p>
-        <p><span class="highlight">Téléphone :</span> ${data.telephone || "Non renseigné"}</p>
-        <p><span class="highlight">Ville :</span> ${data.ville}</p>
-        <p><span class="highlight">Profession :</span> ${data.profession || "Non renseignée"}</p>
-        <p><span class="highlight">Genre :</span> ${data.genre || "Non renseigné"}</p>
-        <p><span class="highlight">Description :</span> ${data.description || "Aucune description fournie"}</p>
+function displaySummary(profile){
+    summaryCard.innerHTML = `
+        <p><span class="highlight">Nom complet :</span> ${profile.prenom} ${profile.nom}</p>
+        <p><span class="highlight">Âge :</span> ${profile.age} ans</p>
+        <p><span class="highlight">Email :</span> ${profile.email}</p>
+        <p><span class="highlight">Ville :</span> ${profile.ville}</p>
+        <p><span class="highlight">Profession :</span> ${profile.profession || "Non renseignée"}</p>
+        <p><span class="highlight">Genre :</span> ${profile.genre || "Non renseigné"}</p>
+        <p><span class="highlight">Description :</span> ${profile.description || "Aucune description"}</p>
     `;
+}
 
-    resultBox.style.display = "block";
-    resultBox.scrollIntoView({behavior:"smooth"});
+function updateTable(){
+    tableBody.innerHTML="";
+    profiles.forEach(p=>{
+        tableBody.innerHTML += `
+            <tr>
+                <td>${p.prenom} ${p.nom}</td>
+                <td>${p.age}</td>
+                <td>${p.email}</td>
+                <td>${p.ville}</td>
+                <td>${p.profession || "-"}</td>
+            </tr>
+        `;
+    });
 }
 
 function resetForm(){
     form.reset();
-    resultBox.style.display = "none";
 }
 </script>
 
