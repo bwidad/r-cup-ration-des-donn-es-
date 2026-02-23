@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Vitrine - Formulaire Personne</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        background: white;
+        width: 90%;
+        max-width: 600px;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 15px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background: #667eea;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #5a67d8;
+    }
+
+    .result {
+        margin-top: 25px;
+        padding: 15px;
+        background: #f4f4f4;
+        border-radius: 8px;
+        display: none;
+    }
+
+    .result h2 {
+        margin-top: 0;
+        color: #444;
+    }
+
+    .summary {
+        line-height: 1.6;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Formulaire d'Information</h1>
+
+    <form id="personForm">
+        <label>Nom</label>
+        <input type="text" id="nom" required>
+
+        <label>Prénom</label>
+        <input type="text" id="prenom" required>
+
+        <label>Âge</label>
+        <input type="number" id="age" required>
+
+        <label>Email</label>
+        <input type="email" id="email" required>
+
+        <label>Ville</label>
+        <input type="text" id="ville" required>
+
+        <label>Profession</label>
+        <input type="text" id="profession">
+
+        <label>Genre</label>
+        <select id="genre">
+            <option value="">Sélectionner</option>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+        </select>
+
+        <label>À propos de vous</label>
+        <textarea id="description" rows="3"></textarea>
+
+        <button type="submit">Soumettre</button>
+    </form>
+
+    <div class="result" id="resultBox">
+        <h2>Résumé des Informations</h2>
+        <div class="summary" id="summaryText"></div>
+    </div>
+</div>
+
+<script>
+document.getElementById("personForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nom = document.getElementById("nom").value;
+    const prenom = document.getElementById("prenom").value;
+    const age = document.getElementById("age").value;
+    const email = document.getElementById("email").value;
+    const ville = document.getElementById("ville").value;
+    const profession = document.getElementById("profession").value;
+    const genre = document.getElementById("genre").value;
+    const description = document.getElementById("description").value;
+
+    const summary = `
+        <strong>Nom complet :</strong> ${prenom} ${nom} <br>
+        <strong>Âge :</strong> ${age} ans <br>
+        <strong>Email :</strong> ${email} <br>
+        <strong>Ville :</strong> ${ville} <br>
+        <strong>Profession :</strong> ${profession || "Non renseignée"} <br>
+        <strong>Genre :</strong> ${genre || "Non renseigné"} <br>
+        <strong>Description :</strong> ${description || "Aucune description fournie"} <br>
+    `;
+
+    document.getElementById("summaryText").innerHTML = summary;
+    document.getElementById("resultBox").style.display = "block";
+});
+</script>
+
+</body>
+</html>
