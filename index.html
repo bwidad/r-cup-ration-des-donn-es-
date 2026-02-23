@@ -3,122 +3,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vitrine - Profil Personne</title>
+<title>Application Vitrine - Profil Personne</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+:root{
+    --primary:#2563eb;
+    --secondary:#f3f4f6;
+    --danger:#dc2626;
+    --success:#16a34a;
 }
 
-body {
-    background: linear-gradient(135deg, #4e73df, #1cc88a);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-.container {
-    background: white;
-    width: 100%;
-    max-width: 700px;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+body{
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #333;
+.container{
+    background:white;
+    width:100%;
+    max-width:750px;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
 }
 
-.form-group {
-    margin-bottom: 15px;
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    color:#111827;
 }
 
-label {
-    font-weight: 600;
-    display: block;
-    margin-bottom: 5px;
+.form-group{
+    margin-bottom:15px;
 }
 
-input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: 0.3s;
+label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:600;
 }
 
-input:focus, select:focus, textarea:focus {
-    border-color: #4e73df;
-    outline: none;
+input, select, textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:14px;
+    transition:0.3s;
 }
 
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.3s;
+input:focus, select:focus, textarea:focus{
+    border-color:var(--primary);
+    outline:none;
 }
 
-.btn-submit {
-    background: #4e73df;
-    color: white;
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
 }
 
-.btn-submit:hover {
-    background: #2e59d9;
+button{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    transition:0.3s;
 }
 
-.btn-reset {
-    background: #e74a3b;
-    color: white;
+.btn-submit{
+    background:var(--primary);
+    color:white;
 }
 
-.btn-reset:hover {
-    background: #c0392b;
+.btn-submit:hover{
+    background:#1d4ed8;
 }
 
-.result {
-    margin-top: 25px;
-    padding: 20px;
-    border-radius: 10px;
-    background: #f8f9fc;
-    display: none;
+.btn-reset{
+    background:var(--danger);
+    color:white;
 }
 
-.result h2 {
-    margin-bottom: 15px;
-    color: #333;
+.btn-reset:hover{
+    background:#b91c1c;
 }
 
-.card {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    line-height: 1.6;
+.result{
+    margin-top:25px;
+    padding:20px;
+    background:var(--secondary);
+    border-radius:10px;
+    display:none;
 }
 
-.highlight {
-    font-weight: bold;
-    color: #4e73df;
+.result h2{
+    margin-bottom:15px;
+    color:#111827;
+}
+
+.summary p{
+    margin-bottom:8px;
+}
+
+.highlight{
+    font-weight:bold;
+    color:var(--primary);
 }
 
 @media(max-width:600px){
-    .container{
-        padding:20px;
+    .buttons{
+        flex-direction:column;
     }
 }
 </style>
@@ -132,22 +140,22 @@ button {
     <form id="personForm">
 
         <div class="form-group">
-            <label>Nom</label>
+            <label>Nom *</label>
             <input type="text" id="nom" required>
         </div>
 
         <div class="form-group">
-            <label>Prénom</label>
+            <label>Prénom *</label>
             <input type="text" id="prenom" required>
         </div>
 
         <div class="form-group">
-            <label>Âge</label>
+            <label>Âge *</label>
             <input type="number" id="age" min="1" max="120" required>
         </div>
 
         <div class="form-group">
-            <label>Email</label>
+            <label>Email *</label>
             <input type="email" id="email" required>
         </div>
 
@@ -157,7 +165,7 @@ button {
         </div>
 
         <div class="form-group">
-            <label>Ville</label>
+            <label>Ville *</label>
             <input type="text" id="ville" required>
         </div>
 
@@ -181,14 +189,16 @@ button {
             <textarea id="description" rows="3"></textarea>
         </div>
 
-        <button type="submit" class="btn-submit">Générer Résumé</button>
-        <button type="button" class="btn-reset" onclick="resetForm()">Réinitialiser</button>
+        <div class="buttons">
+            <button type="submit" class="btn-submit">Générer Résumé</button>
+            <button type="button" class="btn-reset" onclick="resetForm()">Réinitialiser</button>
+        </div>
 
     </form>
 
     <div class="result" id="resultBox">
-        <h2>Résumé du Profil</h2>
-        <div class="card" id="summaryContent"></div>
+        <h2>Résumé des Informations</h2>
+        <div class="summary" id="summaryContent"></div>
     </div>
 </div>
 
@@ -201,28 +211,26 @@ form.addEventListener("submit", function(e){
     e.preventDefault();
 
     const data = {
-        nom: nom.value.trim(),
-        prenom: prenom.value.trim(),
-        age: age.value,
-        email: email.value.trim(),
-        telephone: telephone.value.trim(),
-        ville: ville.value.trim(),
-        profession: profession.value.trim(),
-        genre: genre.value,
-        description: description.value.trim()
+        nom: document.getElementById("nom").value.trim(),
+        prenom: document.getElementById("prenom").value.trim(),
+        age: document.getElementById("age").value,
+        email: document.getElementById("email").value.trim(),
+        telephone: document.getElementById("telephone").value.trim(),
+        ville: document.getElementById("ville").value.trim(),
+        profession: document.getElementById("profession").value.trim(),
+        genre: document.getElementById("genre").value,
+        description: document.getElementById("description").value.trim()
     };
 
-    if(!data.nom || !data.prenom || !data.age || !data.email || !data.ville){
-        alert("Veuillez remplir tous les champs obligatoires !");
+    if(!form.checkValidity()){
+        alert("Veuillez remplir tous les champs obligatoires.");
         return;
     }
 
-    localStorage.setItem("personData", JSON.stringify(data));
-
-    displaySummary(data);
+    generateSummary(data);
 });
 
-function displaySummary(data){
+function generateSummary(data){
     summaryContent.innerHTML = `
         <p><span class="highlight">Nom complet :</span> ${data.prenom} ${data.nom}</p>
         <p><span class="highlight">Âge :</span> ${data.age} ans</p>
@@ -233,20 +241,14 @@ function displaySummary(data){
         <p><span class="highlight">Genre :</span> ${data.genre || "Non renseigné"}</p>
         <p><span class="highlight">Description :</span> ${data.description || "Aucune description fournie"}</p>
     `;
+
     resultBox.style.display = "block";
+    resultBox.scrollIntoView({behavior:"smooth"});
 }
 
 function resetForm(){
     form.reset();
     resultBox.style.display = "none";
-    localStorage.removeItem("personData");
-}
-
-window.onload = function(){
-    const savedData = localStorage.getItem("personData");
-    if(savedData){
-        displaySummary(JSON.parse(savedData));
-    }
 }
 </script>
 
