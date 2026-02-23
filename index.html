@@ -3,155 +3,251 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Application Vitrine - Formulaire Personne</title>
+<title>Vitrine - Profil Personne</title>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-    .container {
-        background: white;
-        width: 90%;
-        max-width: 600px;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
+body {
+    background: linear-gradient(135deg, #4e73df, #1cc88a);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
-    }
+.container {
+    background: white;
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
 
-    label {
-        font-weight: bold;
-        display: block;
-        margin-top: 15px;
-    }
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
 
-    input, select, textarea {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-        font-size: 14px;
-    }
+.form-group {
+    margin-bottom: 15px;
+}
 
-    button {
-        margin-top: 20px;
-        width: 100%;
-        padding: 12px;
-        border: none;
-        border-radius: 6px;
-        background: #667eea;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
 
-    button:hover {
-        background: #5a67d8;
-    }
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s;
+}
 
-    .result {
-        margin-top: 25px;
-        padding: 15px;
-        background: #f4f4f4;
-        border-radius: 8px;
-        display: none;
-    }
+input:focus, select:focus, textarea:focus {
+    border-color: #4e73df;
+    outline: none;
+}
 
-    .result h2 {
-        margin-top: 0;
-        color: #444;
-    }
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
 
-    .summary {
-        line-height: 1.6;
+.btn-submit {
+    background: #4e73df;
+    color: white;
+}
+
+.btn-submit:hover {
+    background: #2e59d9;
+}
+
+.btn-reset {
+    background: #e74a3b;
+    color: white;
+}
+
+.btn-reset:hover {
+    background: #c0392b;
+}
+
+.result {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f8f9fc;
+    display: none;
+}
+
+.result h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    line-height: 1.6;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #4e73df;
+}
+
+@media(max-width:600px){
+    .container{
+        padding:20px;
     }
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-    <h1>Formulaire d'Information</h1>
+    <h1>Formulaire Profil Personne</h1>
 
     <form id="personForm">
-        <label>Nom</label>
-        <input type="text" id="nom" required>
 
-        <label>Prénom</label>
-        <input type="text" id="prenom" required>
+        <div class="form-group">
+            <label>Nom</label>
+            <input type="text" id="nom" required>
+        </div>
 
-        <label>Âge</label>
-        <input type="number" id="age" required>
+        <div class="form-group">
+            <label>Prénom</label>
+            <input type="text" id="prenom" required>
+        </div>
 
-        <label>Email</label>
-        <input type="email" id="email" required>
+        <div class="form-group">
+            <label>Âge</label>
+            <input type="number" id="age" min="1" max="120" required>
+        </div>
 
-        <label>Ville</label>
-        <input type="text" id="ville" required>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" required>
+        </div>
 
-        <label>Profession</label>
-        <input type="text" id="profession">
+        <div class="form-group">
+            <label>Téléphone</label>
+            <input type="tel" id="telephone">
+        </div>
 
-        <label>Genre</label>
-        <select id="genre">
-            <option value="">Sélectionner</option>
-            <option value="Homme">Homme</option>
-            <option value="Femme">Femme</option>
-        </select>
+        <div class="form-group">
+            <label>Ville</label>
+            <input type="text" id="ville" required>
+        </div>
 
-        <label>À propos de vous</label>
-        <textarea id="description" rows="3"></textarea>
+        <div class="form-group">
+            <label>Profession</label>
+            <input type="text" id="profession">
+        </div>
 
-        <button type="submit">Soumettre</button>
+        <div class="form-group">
+            <label>Genre</label>
+            <select id="genre">
+                <option value="">Sélectionner</option>
+                <option>Homme</option>
+                <option>Femme</option>
+                <option>Autre</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea id="description" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Générer Résumé</button>
+        <button type="button" class="btn-reset" onclick="resetForm()">Réinitialiser</button>
+
     </form>
 
     <div class="result" id="resultBox">
-        <h2>Résumé des Informations</h2>
-        <div class="summary" id="summaryText"></div>
+        <h2>Résumé du Profil</h2>
+        <div class="card" id="summaryContent"></div>
     </div>
 </div>
 
 <script>
-document.getElementById("personForm").addEventListener("submit", function(e) {
+const form = document.getElementById("personForm");
+const resultBox = document.getElementById("resultBox");
+const summaryContent = document.getElementById("summaryContent");
+
+form.addEventListener("submit", function(e){
     e.preventDefault();
 
-    const nom = document.getElementById("nom").value;
-    const prenom = document.getElementById("prenom").value;
-    const age = document.getElementById("age").value;
-    const email = document.getElementById("email").value;
-    const ville = document.getElementById("ville").value;
-    const profession = document.getElementById("profession").value;
-    const genre = document.getElementById("genre").value;
-    const description = document.getElementById("description").value;
+    const data = {
+        nom: nom.value.trim(),
+        prenom: prenom.value.trim(),
+        age: age.value,
+        email: email.value.trim(),
+        telephone: telephone.value.trim(),
+        ville: ville.value.trim(),
+        profession: profession.value.trim(),
+        genre: genre.value,
+        description: description.value.trim()
+    };
 
-    const summary = `
-        <strong>Nom complet :</strong> ${prenom} ${nom} <br>
-        <strong>Âge :</strong> ${age} ans <br>
-        <strong>Email :</strong> ${email} <br>
-        <strong>Ville :</strong> ${ville} <br>
-        <strong>Profession :</strong> ${profession || "Non renseignée"} <br>
-        <strong>Genre :</strong> ${genre || "Non renseigné"} <br>
-        <strong>Description :</strong> ${description || "Aucune description fournie"} <br>
-    `;
+    if(!data.nom || !data.prenom || !data.age || !data.email || !data.ville){
+        alert("Veuillez remplir tous les champs obligatoires !");
+        return;
+    }
 
-    document.getElementById("summaryText").innerHTML = summary;
-    document.getElementById("resultBox").style.display = "block";
+    localStorage.setItem("personData", JSON.stringify(data));
+
+    displaySummary(data);
 });
+
+function displaySummary(data){
+    summaryContent.innerHTML = `
+        <p><span class="highlight">Nom complet :</span> ${data.prenom} ${data.nom}</p>
+        <p><span class="highlight">Âge :</span> ${data.age} ans</p>
+        <p><span class="highlight">Email :</span> ${data.email}</p>
+        <p><span class="highlight">Téléphone :</span> ${data.telephone || "Non renseigné"}</p>
+        <p><span class="highlight">Ville :</span> ${data.ville}</p>
+        <p><span class="highlight">Profession :</span> ${data.profession || "Non renseignée"}</p>
+        <p><span class="highlight">Genre :</span> ${data.genre || "Non renseigné"}</p>
+        <p><span class="highlight">Description :</span> ${data.description || "Aucune description fournie"}</p>
+    `;
+    resultBox.style.display = "block";
+}
+
+function resetForm(){
+    form.reset();
+    resultBox.style.display = "none";
+    localStorage.removeItem("personData");
+}
+
+window.onload = function(){
+    const savedData = localStorage.getItem("personData");
+    if(savedData){
+        displaySummary(JSON.parse(savedData));
+    }
+}
 </script>
 
 </body>
