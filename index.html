@@ -57,6 +57,12 @@ input, select, textarea{
     padding:10px;
     border-radius:8px;
     border:1px solid #ccc;
+    transition:0.3s;
+}
+
+input:focus, select:focus, textarea:focus{
+    border-color:var(--primary);
+    outline:none;
 }
 
 textarea{
@@ -158,7 +164,7 @@ th{
             </div>
             <div>
                 <label>Âge *</label>
-                <input type="number" id="age" required>
+                <input type="number" id="age" min="1" max="120" required>
             </div>
             <div>
                 <label>Email *</label>
@@ -223,21 +229,21 @@ let profiles = [];
 form.addEventListener("submit", function(e){
     e.preventDefault();
 
-    const profile = {
-        nom: nom.value.trim(),
-        prenom: prenom.value.trim(),
-        age: age.value,
-        email: email.value.trim(),
-        ville: ville.value.trim(),
-        profession: profession.value.trim(),
-        genre: genre.value,
-        description: description.value.trim()
-    };
-
     if(!form.checkValidity()){
         alert("Veuillez remplir tous les champs obligatoires.");
         return;
     }
+
+    const profile = {
+        nom: document.getElementById("nom").value.trim(),
+        prenom: document.getElementById("prenom").value.trim(),
+        age: document.getElementById("age").value,
+        email: document.getElementById("email").value.trim(),
+        ville: document.getElementById("ville").value.trim(),
+        profession: document.getElementById("profession").value.trim(),
+        genre: document.getElementById("genre").value,
+        description: document.getElementById("description").value.trim()
+    };
 
     profiles.push(profile);
 
